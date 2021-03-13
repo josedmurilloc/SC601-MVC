@@ -26,7 +26,7 @@ namespace SC601_MVC.Controllers
         }
 
         // Edit: Brand
-       
+
         public ActionResult Edit(int id)
         {
             var newBrand = brands.Where(b => b.brand_id == id).FirstOrDefault();
@@ -34,19 +34,26 @@ namespace SC601_MVC.Controllers
             return View(newBrand);
         }
 
+        //Delete: Brand
         public ActionResult Delete(int id)
         {
             var newBrand = brands.Where(b => b.brand_id == id).FirstOrDefault();
 
             return View(newBrand);
         }
+
+        //Details: Brand
         public ActionResult Details(int id)
         {
             var newBrand = brands.Where(b => b.brand_id == id).FirstOrDefault();
 
             return View(newBrand);
         }
+        public ActionResult Create()
+        {
 
+            return View();
+        }
         [HttpPost]
         public ActionResult Edit(Brand brand)
         {
@@ -56,5 +63,30 @@ namespace SC601_MVC.Controllers
             return RedirectToAction("Index");
         }
 
+
+        [HttpPost, ActionName("Delete")]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            var deleteBrand = brands.Where(b => b.brand_id == id).FirstOrDefault();
+            brands.Remove(deleteBrand);
+            return RedirectToAction("Index");
+        }
+        [HttpPost, ActionName("Create")]
+        public ActionResult CreateConfirmed(Brand brand)
+        {
+            var createBrand = brands.Where(b => b.brand_id == brand.brand_id).FirstOrDefault();
+            if (createBrand != null)
+            {
+                TempData["Message"] = "Brand already exists";
+
+            }
+            else
+            {
+                brands.Add(brand);
+                return RedirectToAction("Index");
+
+            }
+            return View();
+        }
     }
 }
