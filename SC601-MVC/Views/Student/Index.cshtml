@@ -1,0 +1,21 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Students</h2>
+
+<label>Total Students:</label> @ViewBag.TotalStudents
+
+<label>Total Test:</label> @ViewBag.Test
+
+
+@foreach (var student in ViewData["students"] as IList<SC601_MVC.Models.Student>)
+{
+    <li>
+        @student.StudentName
+    </li>
+
+}
+

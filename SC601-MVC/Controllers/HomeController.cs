@@ -8,8 +8,10 @@ namespace SC601_MVC.Controllers
 {
     public class HomeController : Controller
     {
+        [HandleError]
         public ActionResult Index()
         {
+            //throw new Exception("Esto es un Error ");
             return View();
         }
 
